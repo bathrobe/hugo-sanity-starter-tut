@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+<meta charset="utf-8">
+{{ .Hugo.Generator }}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" href="/css/skeleton.css">
+<link rel="stylesheet" href="/css/custom.css">
+<title>My Hugo Sanity Site</title>
+</head>
+
+<body>
+    <div class="container">
+    {{ partial "header" (dict "Kind" .Kind "Template" "List") }}
+	<main role="main">
+        {{.Content}}
+        {{ range .Pages }}
+
+        
+                    <h2 class="entry-title" itemprop="headline"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+                        <p style="margin-bottom: 0">{{ .Date.Format "January 2, 2006" }}</p>
+                      
+                      <p style="a:hover{color:blue;}">{{ if .Params.categories }}{{range .Params.categories}}<a style=" color:grey; border-bottom: none;box-shadow: none; font-weight: 500;" href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{end}}{{end}}</p>
+        {{ end }}
+        
+            </main>
+    {{ partial "footer" . }}
+</div>
+</body>
